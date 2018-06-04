@@ -53,8 +53,16 @@ class Rectangle extends Shape {
       cords: this.getCoords(),
       dims: this.getDims(),
       color: this.getColor()
-  };
-
+  }
+}
+  drawDisplay() {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const coords = this.getCoords();
+      const size = this.getDims();
+      context.rect(coords.x, coords.y, size.width, size.height);
+      context.fillStyle = this.getColor();
+      context.fill();
   }
 }
 
@@ -79,15 +87,13 @@ class Circle extends Shape {
       color: this.getColor()
   };
   }
+
+  drawDisplay() {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const coords = this.getCoords();
+      context.arc(coords.x, coords.y, this.getRadius(), 0, 2*Math.PI);
+      context.fillStyle = this.getColor();
+      context.fill();
+  }
 }
-
-const rectangle = new Rectangle();
-
-const drRec = rectangle.draw();
-
-const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
-
-context.rect(20, 20, 150, 150);
-context.fillStyle = '#000000';
-context.fill();
