@@ -14,7 +14,10 @@ class Shape {
   }
 
   getCoords() {
-    return `X: ${this.initX} Y: ${this.initY}`;
+    return {
+        x: this.initX,
+        y: this.initY
+    };
   }
 
   moveTo(newX, newY) {
@@ -39,16 +42,19 @@ class Rectangle extends Shape {
   }
 
   getDims() {
-    return `width: ${this.initWidth}
-        height: ${this.initHeight}`;
+    return {
+        width: this.initWidth,
+        height: this.initHeight
+    }
   }
 
   draw() {
-    return `Drawing a Rectangle at:
-      (${this.getCoords()})
-      With dimentions:
-        ${this.getDims()}
-      Filled with color: ${this.getColor()}`;
+    return {
+      cords: this.getCoords(),
+      dims: this.getDims(),
+      color: this.getColor()
+  };
+
   }
 }
 
@@ -67,24 +73,21 @@ class Circle extends Shape {
   }
 
   draw() {
-    return `Drawing a Circle at:
-      (${this.getCoords()})
-    With dimentions:
-      ${this.getRadius()}
-    Filled with color: ${this.getColor()}`;
+    return {
+      cords: this.getCoords(),
+      radius: this.getRadius(),
+      color: this.getColor()
+  };
   }
 }
+
+const rectangle = new Rectangle();
+
+const drRec = rectangle.draw();
 
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
-function drawTriangle(context, left_padding, top_padding, height, width) {
-    context.beginPath();
-    context.moveTo(0 + left_padding, 0 + height + top_padding);
-    context.lineTo(width / 2 + left_padding, 0 + top_padding);
-    context.lineTo(width + left_padding, 0 + height + top_padding);
-    context.fillStyle = "#FF0000";
-    context.fill();
-}
-
-drawTriangle(context, 40, 50, 200, 200);
+context.rect(20, 20, 150, 150);
+context.fillStyle = '#000000';
+context.fill();
